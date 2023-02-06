@@ -1,0 +1,188 @@
+##
+# DOCUMENTATION:
+#
+# Write the description of this Docker Compose here.
+#
+
+# Compose and Docker compatibility matrix.
+# Compose file format: 3.8
+# Docker Engine release: 19.03.0+
+version: "3.8"
+
+# Defining swarm volumes with the DRIVER(local).
+volumes:
+  vol_redis_data:
+  vol_rabbitmq_data:
+  vol_mssql_data:
+
+# Defining a local network with the DRIVER(bridge).
+networks:
+  network_local:
+    external: false
+
+# Defining container services for Compose.
+services:
+
+  redis_server:
+    image: redis:6.0.5
+    container_name: container_redis
+    environment:
+      REDIS_REPLICATION_MODE: 'master'
+      REDIS_DISABLE_COMMANDS: 'FLUSHDB,FLUSHALL,CONFIG'
+      REDIS_PORT_NUMBER: 6379
+      REDIS_PASSWORD: 'password'
+    command: [
+      "redis-server", "/usr/local/etc/redis/redis.conf", "--loglevel", "warning"
+    ]
+    ports:
+      - "6379:6379"
+    networks:
+      - network_local
+    volumes:
+      - "./files/services/redis/redis-custom.conf:/usr/local/etc/redis/redis.conf"
+      - "vol_redis_data:/data"
+    restart: on-failure
+
+  # UI Web: http://localhost:8081/
+  redis_webapp:
+    image: rediscommander/redis-commander:latest
+    container_name: container_redis_webapp
+    depends_on:
+      - redis_server
+    environment:
+      REDIS_HOSTS: 'local:redis_server:6379:0:password'
+      ADDRESS: '0.0.0.0'
+      HTTP_USER: 'admin'
+      HTTP_PASSWORD: 'password'
+    ports:
+      - "0.0.0.0:8081:8081"
+    networks:
+      - network_local
+    restart: on-failure
+
+  # UI Web: http://localhost:15672/#/
+  rabbitmq_server:
+    image: rabbitmq:3.11-management
+    container_name: container_rabbitmq_server
+    environment:
+      RABBITMQ_DEFAULT_USER: 'admin'
+      RABBITMQ_DEFAULT_PASS: 'password'
+    ports:
+      - "5672:5672" # AMQP protocol port
+      - "15672:15672" # HTTP management UI
+    networks:
+      - network_local
+    volumes:
+      - "./files/services/rabbitmq/rabbitmq-3.11.conf:/etc/rabbitmq/rabbitmq.conf"
+      - "vol_rabbitmq_data:/var/lib/rabbitmq"
+    restart: on-failure
+
+  mssql_server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: container_mssql_server
+    user: root
+    environment:
+      # Overwrite default image environment variables:
+      MSSQL_USER: sa
+      MSSQL_DATABASE: master
+      MSSQL_IP_ADDRESS: '0.0.0.0'
+      MSSQL_TCP_PORT: 1433
+      MSSQL_DATA_DIR: '/var/opt/mssql/data'
+      MSSQL_LOG_DIR: '/var/opt/mssql/log'
+      MSSQL_BACKUP_DIR: '/var/opt/mssql/backup'
+      MSSQL_PID: Developer
+      SA_PASSWORD: '!demo54321'
+      ACCEPT_EULA: 'Y'
+      TZ: 'America/New_York'
+    ports:
+      - "1433:1433"
+      - "5022:5022"
+    networks:
+      - network_local
+    volumes:
+      - "vol_mssql_data:/var/opt/mssql/data"
+    restart: on-failure
+    # The HEALTHCHECK instruction tells Docker how to test a container to check that it is still working.
+    healthcheck:
+      test: [
+        "CMD", "/opt/mssql-tools/bin/sqlcmd",
+        "-t", "1",
+        "-S", "0.0.0.0",
+        "-U", "sa",
+        "-P", "!demo54321",
+        "-Q", "select 1"
+      ]
+      interval: 5s
+      timeout: 2s
+      retries: 8
+      start_period: 18s
+
+  mssql_tools:
+    image: mcr.microsoft.com/mssql-tools
+    container_name: container_mssql_tools
+    depends_on:
+      - mssql_server
+    environment:
+      # Overwrite default image environment variables:
+      MSSQL_USER: sa
+      MSSQL_DATABASE: master
+      MSSQL_IP_ADDRESS: mssql_server
+      SA_PASSWORD: '!demo54321'
+    command: /bin/bash ./tmp/entrypoint.sh
+    volumes:
+      - "./files/services/mssql/sql-scripts:/docker-entrypoint-initdb.d"
+      - "./files/services/mssql/entrypoint.sh:/tmp/entrypoint.sh"
+    networks:
+      - network_local
+    restart: on-failure
+
+  # UI Web: http://localhost:3001/
+  sqlpad_webapp:
+    image: sqlpad/sqlpad:6
+    container_name: container_sqlpad_webapp
+    depends_on:
+      - mssql_server
+    environment:
+      SQLPAD_ADMIN: 'admin'
+      SQLPAD_ADMIN_PASSWORD: 'password'
+      SQLPAD_APP_LOG_LEVEL: info
+      SQLPAD_WEB_LOG_LEVEL: warn
+      SQLPAD_SEED_DATA_PATH: /etc/sqlpad/seed-data
+      # SQL Server connection - Master:
+      SQLPAD_CONNECTIONS__sqlserver01__name: 'SQL Server Master'
+      SQLPAD_CONNECTIONS__sqlserver01__driver: sqlserver
+      SQLPAD_CONNECTIONS__sqlserver01__host: mssql_server
+      SQLPAD_CONNECTIONS__sqlserver01__database: master
+      SQLPAD_CONNECTIONS__sqlserver01__username: sa
+      SQLPAD_CONNECTIONS__sqlserver01__password: '!demo54321'
+      # SQL Server connection - Quickstart:
+      SQLPAD_CONNECTIONS__sqlserver02__name: 'SQL Server Quickstart'
+      SQLPAD_CONNECTIONS__sqlserver02__driver: sqlserver
+      SQLPAD_CONNECTIONS__sqlserver02__host: mssql_server
+      SQLPAD_CONNECTIONS__sqlserver02__database: quickstart
+      SQLPAD_CONNECTIONS__sqlserver02__username: sa
+      SQLPAD_CONNECTIONS__sqlserver02__password: '!demo54321'
+    ports:
+      - "127.0.0.1:3001:3000"
+    networks:
+      - network_local
+    restart: on-failure
+
+  # UI Web: http://localhost:5000/swagger/index.html
+  # UI Web: http://localhost:5000/web/index.html
+  # UI Web: http://localhost:5000/api/produtos
+  app_webapi:
+    image: image/app/webapi
+    container_name: container_app_webapi
+    depends_on:
+      - mssql_server
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    build:
+      context: ./
+      dockerfile: Dockerfile.webapi
+    ports:
+      - "5000:80"
+    networks:
+      - network_local
+    restart: on-failure

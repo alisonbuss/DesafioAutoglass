@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DesafioAutoglass.Common/DesafioAutoglass.Common.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostClean" AfterTargets="Clean">
+    <!-- obj -->
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+    <!-- bin -->
+    <RemoveDir Directories="$(BaseOutputPath)" />
+  </Target>
+
+</Project>

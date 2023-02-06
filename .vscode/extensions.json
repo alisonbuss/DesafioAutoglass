@@ -1,0 +1,27 @@
+{
+  // List all installed extensions:
+  // $ code --list-extensions;
+  "recommendations": [
+    // Trailing Spaces
+    // $ code --install-extension shardulm94.trailing-spaces;
+    "shardulm94.trailing-spaces",
+    // Material Icon Theme
+    // $ code --install-extension Kief.material-icon-them;
+    "PKief.material-icon-theme",
+    // C#
+    // $ code --install-extension ms-dotnettools.csharp;
+    "ms-dotnettools.csharp",
+    // C# Extensions
+    // $ code --install-extension kreativ-software.csharpextensions;
+    "kreativ-software.csharpextensions",
+    // VSCODE Solution Explorer
+    // $ code --install-extension fernandoescolar.vscode-solution-explorer;
+    "fernandoescolar.vscode-solution-explorer",
+    // .NET Core Test Explorer
+    // $ code --install-extension formulahendry.dotnet-test-explorer;
+    "formulahendry.dotnet-test-explorer",
+    // NuGet GalleryPreview
+    // $ code --install-extension patcx.vscode-nuget-gallery;
+    "patcx.vscode-nuget-gallery"
+  ]
+}

@@ -1,0 +1,94 @@
+
+# CREATE A SOLUTION:
+
+$ dotnet new sln --name DesafioAutoglass --output ./DesafioAutoglass;
+
+$ dotnet new gitignore;
+
+# CREATE PROJECT:
+
+$ dotnet new webapi --name DesafioAutoglass.Service.API --no-https true --output ./DesafioAutoglass/src/DesafioAutoglass.Service.API;
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Service.API/DesafioAutoglass.Service.API.csproj --solution-folder '1 - Services';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Service.API/Controllers;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Service.API/Configurations;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Service.API/StaticContents/private;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Service.API/StaticContents/public;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Application --output ./DesafioAutoglass/src/DesafioAutoglass.Application --framework net7.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Application/DesafioAutoglass.Application.csproj --solution-folder '2 - Application';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Application/Dtos;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Application/Interfaces;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Application/Mappers;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Application/Services;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Domain --output ./DesafioAutoglass/src/DesafioAutoglass.Domain --framework net7.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Domain/DesafioAutoglass.Domain.csproj --solution-folder '3 - Domain';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Entities;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Enums;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Interfaces;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Interfaces/Repositories;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Interfaces/Services;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Services;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Domain/Validators;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Infra.Data --output ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data --framework net7.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data/DesafioAutoglass.Infra.Data.csproj --solution-folder '4 - Infra';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data/Context;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data/Mappings;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data/Migrations;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.Data/Repositories;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Infra.Cache --output ./DesafioAutoglass/src/DesafioAutoglass.Infra.Cache --framework net7.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Infra.Cache/DesafioAutoglass.Infra.Cache.csproj --solution-folder '4 - Infra';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.Cache/Repositories;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Infra.CrossCutting --output ./DesafioAutoglass/src/DesafioAutoglass.Infra.CrossCutting --framework net7.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Infra.CrossCutting/DesafioAutoglass.Infra.CrossCutting.csproj --solution-folder '4 - Infra';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.CrossCutting/Interfaces;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Infra.CrossCutting/IoC;
+
+
+# CREATE PROJECT:
+
+$ dotnet new classlib --name DesafioAutoglass.Common --output ./DesafioAutoglass/src/DesafioAutoglass.Common --framework net7.0;
+$ dotnet add ./DesafioAutoglass/src/DesafioAutoglass.Common/DesafioAutoglass.Common.csproj package Microsoft.Extensions.Logging.Abstractions -v 7.0.0;
+$ dotnet add ./DesafioAutoglass/src/DesafioAutoglass.Common/DesafioAutoglass.Common.csproj package FluentValidation -v 11.4.0;
+
+$ dotnet sln ./DesafioAutoglass/DesafioAutoglass.sln add ./DesafioAutoglass/src/DesafioAutoglass.Common/DesafioAutoglass.Common.csproj --solution-folder '5 - Common';
+
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Common/Constants;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Common/Enums;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Common/Impls;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Common/Interfaces;
+$ mkdir -p -v ./DesafioAutoglass/src/DesafioAutoglass.Common/Objects;
+
+
+# RESTORE SOLUTION:
+
+$ dotnet restore ./DesafioAutoglass/DesafioAutoglass.sln;

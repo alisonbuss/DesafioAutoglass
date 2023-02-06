@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../DesafioAutoglass.Common/DesafioAutoglass.Common.csproj" />
+    <ProjectReference Include="../DesafioAutoglass.Domain/DesafioAutoglass.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <Target Name="PostClean" AfterTargets="Clean">
+    <!-- obj -->
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />
+    <!-- bin -->
+    <RemoveDir Directories="$(BaseOutputPath)" />
+  </Target>
+
+</Project>

@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services", "1 - Services", "{66115C2C-AAF9-41D2-A464-B29B7E9723AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Service.API", "src\DesafioAutoglass.Service.API\DesafioAutoglass.Service.API.csproj", "{0CC928F3-366A-4E03-972E-EB0F01034FB6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{D784FC6C-1BC3-4228-A5DE-0AD1939D0651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Application", "src\DesafioAutoglass.Application\DesafioAutoglass.Application.csproj", "{017BFCA2-0113-453B-AA28-46FBDF71F4CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{B1C2BF86-E917-47C8-B437-CA383A6DEB18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Domain", "src\DesafioAutoglass.Domain\DesafioAutoglass.Domain.csproj", "{F3CEB5BD-A978-4333-834F-5638AF8D8C83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{71838D31-B7DD-4396-B259-F6A471E796EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Infra.Data", "src\DesafioAutoglass.Infra.Data\DesafioAutoglass.Infra.Data.csproj", "{77F1F4D0-8BBF-4574-9564-1846385CD732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Infra.Cache", "src\DesafioAutoglass.Infra.Cache\DesafioAutoglass.Infra.Cache.csproj", "{F97F431C-63C4-44DB-9277-C63E21AC7E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Infra.CrossCutting", "src\DesafioAutoglass.Infra.CrossCutting\DesafioAutoglass.Infra.CrossCutting.csproj", "{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Common", "5 - Common", "{075D9359-45E6-4D48-91AC-ED602AE4F846}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesafioAutoglass.Common", "src\DesafioAutoglass.Common\DesafioAutoglass.Common.csproj", "{4842DA4D-052E-44BD-B6B4-991D6DAC388F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CC928F3-366A-4E03-972E-EB0F01034FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CC928F3-366A-4E03-972E-EB0F01034FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CC928F3-366A-4E03-972E-EB0F01034FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CC928F3-366A-4E03-972E-EB0F01034FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{017BFCA2-0113-453B-AA28-46FBDF71F4CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{017BFCA2-0113-453B-AA28-46FBDF71F4CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{017BFCA2-0113-453B-AA28-46FBDF71F4CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{017BFCA2-0113-453B-AA28-46FBDF71F4CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CEB5BD-A978-4333-834F-5638AF8D8C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CEB5BD-A978-4333-834F-5638AF8D8C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CEB5BD-A978-4333-834F-5638AF8D8C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CEB5BD-A978-4333-834F-5638AF8D8C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F1F4D0-8BBF-4574-9564-1846385CD732}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F1F4D0-8BBF-4574-9564-1846385CD732}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F1F4D0-8BBF-4574-9564-1846385CD732}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F1F4D0-8BBF-4574-9564-1846385CD732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F97F431C-63C4-44DB-9277-C63E21AC7E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F97F431C-63C4-44DB-9277-C63E21AC7E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F97F431C-63C4-44DB-9277-C63E21AC7E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F97F431C-63C4-44DB-9277-C63E21AC7E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4842DA4D-052E-44BD-B6B4-991D6DAC388F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4842DA4D-052E-44BD-B6B4-991D6DAC388F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4842DA4D-052E-44BD-B6B4-991D6DAC388F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4842DA4D-052E-44BD-B6B4-991D6DAC388F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0CC928F3-366A-4E03-972E-EB0F01034FB6} = {66115C2C-AAF9-41D2-A464-B29B7E9723AE}
+		{017BFCA2-0113-453B-AA28-46FBDF71F4CF} = {D784FC6C-1BC3-4228-A5DE-0AD1939D0651}
+		{F3CEB5BD-A978-4333-834F-5638AF8D8C83} = {B1C2BF86-E917-47C8-B437-CA383A6DEB18}
+		{77F1F4D0-8BBF-4574-9564-1846385CD732} = {71838D31-B7DD-4396-B259-F6A471E796EE}
+		{F97F431C-63C4-44DB-9277-C63E21AC7E30} = {71838D31-B7DD-4396-B259-F6A471E796EE}
+		{C853FBCF-A929-4BC8-A6B2-FBE29F4E6BF2} = {71838D31-B7DD-4396-B259-F6A471E796EE}
+		{4842DA4D-052E-44BD-B6B4-991D6DAC388F} = {075D9359-45E6-4D48-91AC-ED602AE4F846}
+	EndGlobalSection
+EndGlobal

@@ -18,7 +18,13 @@ namespace DesafioAutoglass.Service.API.Configurations
             // services.AddDbContext<DbContextBase>(options =>
             //         options.UseSqlite(configuration.GetConnectionString("SqliteConnection")));
 
-            services.AddDbContext<DbContextBase>(options =>
+            var connectionString = Environment.GetEnvironmentVariable("ASPNETCORE_CONNECTION_STRING");
+
+            if (!string.IsNullOrEmpty(connectionString))
+                services.AddDbContext<DbContextBase>(options =>
+                    options.UseSqlServer(connectionString));
+            else
+                services.AddDbContext<DbContextBase>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("SqlServerConnection")));
 
             services.AddScoped<DbContextBase, DbContextBase>();

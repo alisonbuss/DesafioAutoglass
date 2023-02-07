@@ -66,10 +66,6 @@ namespace DesafioAutoglass.Service.WebAPI
 
             app.UseCors();
 
-            app.UseAuthorization();
-
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.MapGet("/", () => "Hello World!");

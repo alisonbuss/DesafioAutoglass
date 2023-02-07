@@ -1,0 +1,34 @@
+# Compose and Docker compatibility matrix.
+# Compose file format: 3.8
+# Docker Engine release: 19.03.0+
+version: "3.8"
+
+# Defining swarm volumes with the DRIVER(local).
+volumes:
+  vol_webapi_data:
+
+# Defining a local network with the DRIVER(bridge).
+networks:
+  network_services:
+    external: true
+
+# Defining container services for Compose.
+services:
+
+  # UI Web: http://localhost:5000/swagger/index.html
+  # UI Web: http://localhost:5000/web/index.html
+  # UI Web: http://localhost:5000/api/produtos
+  app_webapi:
+    image: image/app/webapi
+    container_name: container_app_webapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_CONNECTION_STRING: 'Server=mssql_server,1433;Database=quickstart;User=sa;Password=!demo54321;Trusted_Connection=False;TrustServerCertificate=True;MultipleActiveResultSets=True;'
+    build:
+      context: ./
+      dockerfile: Dockerfile.webapi
+    ports:
+      - "5000:80"
+    networks:
+      - network_services
+    restart: on-failure
